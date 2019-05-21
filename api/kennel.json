@@ -1,0 +1,32 @@
+{
+    "employees": [{
+            "id": 1,
+            "name": "Jessica Younker"
+        },
+        {
+            "id": 2,
+            "name": "Jordan Nelson"
+        },
+        {
+            "id": 3,
+            "name": "Zoe LeBlanc"
+        },
+        {
+            "id": 4,
+            "name": "Blaise Roberts"
+        }
+    ],
+    "animals": [{
+            "id": 1,
+            "name": "Kingsley"
+        },
+        {
+            "id": 2,
+            "name": "Riley"
+        },
+        {
+            "id": 3,
+            "name": "Dumpy"
+        }
+    ]
+}
