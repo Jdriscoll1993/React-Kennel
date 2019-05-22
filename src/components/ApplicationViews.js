@@ -1,17 +1,25 @@
 import { Route } from 'react-router-dom'
+import { withRouter } from 'react-router'
 import React, { Component } from "react"
 import AnimalList from './animal/AnimalList'
-import LocationList from './location/LocationList'
-import EmployeeList from './employee/EmployeeList'
 import AnimalManager from "../modules/AnimalManager"
-import EmployeesManager from "../modules/EmployeesManager"
+import AnimalDetail from "./animal/AnimalDetail"
+import AnimalForm from "./animal/AnimalForm"
+import LocationList from './location/LocationList'
 import LocationManager from "../modules/LocationManager"
+import LocationDetail from "./location/LocationDetail"
+import EmployeeList from './employee/EmployeeList'
+import EmployeesManager from "../modules/EmployeesManager"
+import EmployeeDetail from "./employee/EmployeeDetail"
+import OwnerList from "./owner/OwnerList"
+import OwnerManager from "../modules/OwnerManager"
 class ApplicationViews extends Component {
 
     state = {
         employees: [],
         locations: [],
-        animals: []
+        animals: [],
+        owners:[]
     }
 
     deleteAnimal = (id) => {
@@ -22,9 +30,64 @@ class ApplicationViews extends Component {
             console.log("animals", animals);
             newState.animals = animals
             })
-            .then (() => this.setState(newState))
+            .then (() => {
+                this.props.history.push("/animals")
+                this.setState(newState)
+            })
+    }
+
+    deleteEmployee = (id) => {
+        const newState = {};
+        EmployeesManager.deleteEmployee(id)
+        .then(EmployeesManager.getAll)
+        .then(employees => {
+            console.log("employees", employees);
+            newState.employees = employees
+            })
+            .then (() => {
+                this.props.history.push("/employees")
+                this.setState(newState)
+            })
     }
     
+
+    deleteLocation = (id) => {
+        const newState = {};
+        LocationManager.deleteLocation(id)
+        .then(LocationManager.getAll)
+        .then(locations => {
+            console.log("locations", locations);
+            newState.locations = locations
+            })
+            .then (() => {
+                this.props.history.push("/locations")
+                this.setState(newState)
+            })
+    }
+
+    deleteOwner = (id) => {
+        const newState = {};
+        OwnerManager.deleteOwner(id)
+        .then(OwnerManager.getAll)
+        .then(owners => {
+            console.log("owners", owners);
+            newState.owners = owners
+        })
+        .then (() => {
+            this.props.history.push("/owners")
+            this.setState(newState)
+        })
+    }
+
+    addAnimal = animal =>
+        AnimalManager.post(animal)
+            .then(() => AnimalManager.getAll())
+            .then(animals =>
+                this.setState({
+                    animals: animals
+                })
+      );
+        
     componentDidMount(){
         console.log("APPVIEWS componentDidMount")
         const newState = {};
@@ -33,17 +96,22 @@ class ApplicationViews extends Component {
                 console.log("animals", animals)
                 newState.animals = animals})
             .then(() => 
-                EmployeesManager.getAll()
-                .then(employees => {
-                    console.log("employees", employees)
-                    newState.employees = employees})
-                .then(()=> 
-                LocationManager.getAll()
-                .then(locations => {
-                    console.log("locations", locations)
-                    newState.locations = locations})
-                .then(()=> this.setState(newState))
-            ))}
+        EmployeesManager.getAll()
+            .then(employees => {
+            console.log("employees", employees)
+            newState.employees = employees})
+            .then(()=> 
+        LocationManager.getAll()
+            .then(locations => {
+            console.log("locations", locations)
+            newState.locations = locations})
+            .then(()=> 
+        OwnerManager.getAll()
+            .then(owners => {
+            console.log("owners", owners)
+            newState.owners = owners})        
+            .then(() =>this.setState(newState))
+            )))}
 
     render() {
         console.log("APPVIEWS render");
@@ -51,18 +119,62 @@ class ApplicationViews extends Component {
             // <> short hand for <React.Fragment>
             <> 
                 <Route exact path="/" render={(props) => {
-                    return <LocationList locations={this.state.locations} />
+                    return <LocationList locations={this.state.locations}
+                                                    deleteLocation={this.deleteLocation}/>
                 }} />
-                <Route path="/animals" render={(props) => {
-                    return <AnimalList animals={this.state.animals}  
+                <Route path="/locations/:locationId(\d+)" render={(props) => {
+                    // Find the animal with the id of the route parameter
+                    let location = this.state.locations.find(location =>
+                        location.id === parseInt(props.match.params.locationId)
+                    )
+                    if (!location) {
+                        location = {id:404, name:"404", breed: "Location not found"}
+                    }
+                    return <LocationDetail location={ location }
+                                deleteLocation={ this.deleteLocation } />
+                }} />                
+                <Route exact path="/animals" render={(props) => {
+                    return <AnimalList animals={this.state.animals}  {...props}
                                                     deleteAnimal={this.deleteAnimal}/>
                 }} />
-                <Route path="/employees" render={(props) => {
-                    return <EmployeeList employees={this.state.employees} />
+                <Route path="/animals/:animalId(\d+)" render={(props) => {
+                    // Find the animal with the id of the route parameter
+                    let animal = this.state.animals.find(animal =>
+                        animal.id === parseInt(props.match.params.animalId)
+                    )
+                    if (!animal) {
+                        animal = {id:404, name:"404", breed: "Dog not found"}
+                    }
+                    return <AnimalDetail animal={ animal }
+                                deleteAnimal={ this.deleteAnimal } />
                 }} />
+                <Route path="/animals/new" render={(props) => {
+                    return <AnimalForm {...props}
+                                addAnimal={this.addAnimal}
+                                employees={this.state.employees} />
+                }} />
+                <Route exact path="/employees" render={(props) => {
+                    return <EmployeeList employees={this.state.employees}
+                                                        deleteEmployee={this.deleteEmployee} />
+                }} />
+                <Route path="/employees/:employeeId(\d+)" render={(props) => {
+                    let employee = this.state.employees.find(employee =>
+                        employee.id === parseInt(props.match.params.employeeId)
+                    )
+                    if (!employee) {
+                        employee = {id:404, name:"404", breed: "Employee not found"}
+                    }
+                    return <EmployeeDetail employee={ employee }
+                                deleteEmployee={ this.deleteEmployee } />
+                }} />      
+                <Route exact path="/owners" render={(props) => {
+                    return <OwnerList owners={this.state.owners}
+                                                    deleteOwner={this.deleteOwner}/>
+                }} />   
             </>
         )
     }
 }
 
-export default ApplicationViews
+export default withRouter(ApplicationViews)
+

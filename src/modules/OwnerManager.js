@@ -2,13 +2,13 @@ const remoteURL = "http://localhost:5002"
 
 export default {
     get(id) {
-      return fetch(`${remoteURL}/employees/${id}`).then(e => e.json())
+      return fetch(`${remoteURL}/owners/${id}`).then(e => e.json())
     },
     getAll() {
-      return fetch(`${remoteURL}/employees`).then(e => e.json())
+      return fetch(`${remoteURL}/owners`).then(e => e.json())
     },
-    deleteEmployee(id) {
-      return fetch(`${remoteURL}/employees/${id}`, {
+    deleteOwner(id) {
+      return fetch(`${remoteURL}/owners/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json"
@@ -16,4 +16,3 @@ export default {
       }).then(e => e.json())
     }
   }
-

@@ -19,22 +19,3 @@ class Kennel extends Component {
     }
 }
 export default Kennel
-
-    // state = {
-    //     id: 75,
-    //     type: "general",
-    //     setup: "what the fuck",
-    //     punchline: "quiet"
-
-    // }
-
-    // setNewJokeState= jokeObj => {
-    //     this.setState({
-    //         id: jokeObj.id,
-    //         type: jokeObj.type,
-    //         setup: jokeObj.setup,
-    //         punchline: jokeObj.punchline
-    //     })
-    // }
-
-

@@ -1,22 +1,20 @@
 {
-  "employees": [{
+  "employees": [
+    {
       "id": 1,
-      "name": "Jessica Younker"
+      "name": "John"
     },
     {
       "id": 2,
-      "name": "Jordan Nelson"
+      "name": "Jon"
     },
     {
       "id": 3,
-      "name": "Zoe LeBlanc"
-    },
-    {
-      "id": 4,
-      "name": "Blaise Roberts"
+      "name": "Johnny"
     }
   ],
-  "animals": [{
+  "animals": [
+    {
       "id": 1,
       "name": "Kingsley"
     },
@@ -26,18 +24,11 @@
     },
     {
       "id": 3,
-      "name": "Tiny"
-    },
-    {
-      "id": 4,
-      "name": "Shiny"
-    },
-    {
-      "id": 5,
-      "name": "Guil"
+      "name": "Mabel"
     }
   ],
-  "locations": [{
+  "locations": [
+    {
       "id": 1,
       "name": "Nashville North",
       "address": "500 Circle Way"
@@ -45,7 +36,24 @@
     {
       "id": 2,
       "name": "Nashville South",
-      "address": "10101 Binary Court"
+      "address": "22 Sick Animal Place"
+    }
+  ],
+  "owners": [
+    {
+      "id": 1,
+      "name": "Carls Jr.",
+      "phoneNumber": "207-604-6895"
+    },
+    {
+      "id": 2,
+      "name": "Tom Brady",
+      "phoneNumber": "203-641-1246"
+    },
+    {
+      "id": 3,
+      "name": "Valadmir",
+      "phoneNumber": "654-524-5935"
     }
   ]
 }
