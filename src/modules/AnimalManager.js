@@ -14,6 +14,15 @@ export default {
           "Content-Type": "application/json"
         },
       }).then(e => e.json())
+    },
+    post(animal){
+      return fetch(`${remoteURL}/animals`,{
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(animal)
+      }).then(e => e.json())
     }
   }
 
