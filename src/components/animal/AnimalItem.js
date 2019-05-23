@@ -21,9 +21,16 @@ class AnimalItem extends Component {
     return (
       <article className = "animal-item">
           <img src={ dog } className="icon--dog" alt="dog"/>
-          <h3>{this.props.animal.name}</h3>
+          <h4>{this.props.animal.name}</h4>
+          <h6>{this.props.animal.breed}</h6>
           <button onClick={this.handleClick} disabled={ this.state.saveDisabled }>Delete</button>
-          <Link to={`/animals/${this.props.animal.id}`}>Details</Link>
+          <Link className="deets" to={`/animals/${this.props.animal.id}`}>Details</Link>
+          <button
+              type="button"
+              className="btn btn-success"
+              onClick={() => {
+                this.props.history.push(`/animals/${this.props.animal.id}/edit`);
+            }}>Edit</button>
           <hr/>
       </article>
     )

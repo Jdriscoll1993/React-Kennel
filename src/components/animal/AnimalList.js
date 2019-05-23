@@ -4,23 +4,24 @@ import AnimalItem from "./AnimalItem"
 export default class AnimalList extends Component {
 
     render() {
+        console.log("animal list render")
         return (
             <div className="animal-div">
-                <h2>All Animals</h2>
-                <section className="animals">
+                <h2>Animals</h2>
                     <div className="animalButton">
                         <button type="button"
                                 className="btn btn-success"
                                 onClick={() => {
                                     this.props.history.push("/animals/new")}
                                 }>
-                            Admit Animal
+                            Add New Animal
                         </button>
                     </div>
+                <section className="animals">
                 <hr/>
                 {
                     this.props.animals.map((item)=>{
-                        return <AnimalItem key={item.id} animal={item}
+                        return <AnimalItem key={item.id} animal={item} {...this.props}
                             deleteAnimal ={this.props.deleteAnimal} />
                     })
                 }

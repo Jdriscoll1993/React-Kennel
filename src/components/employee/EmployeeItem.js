@@ -18,9 +18,10 @@ class EmployeeItem extends Component {
   render() {
     return (
       <article className = "employee-item">
-          <h3>{this.props.employee.name}</h3>
+          <h4>{this.props.employee.name}</h4>
+          <h6>{this.props.employee.status}</h6>
           <button onClick={this.handleClick} disabled={ this.state.saveDisabled }>Delete</button>
-          <Link to={`/employees/${this.props.employee.id}`}>Details</Link>
+          <Link className="deets" to={`/employees/${this.props.employee.id}`}>Details</Link>
           <hr/>
       </article>
     )

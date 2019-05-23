@@ -1,42 +1,59 @@
 {
   "employees": [
     {
-      "id": 1,
-      "name": "John"
+      "name": "Eddie",
+      "status": "Full Time",
+      "id": 1
     },
     {
-      "id": 2,
-      "name": "Jon"
+      "name": "Vaughn ",
+      "status": "Head of Custodial Staff",
+      "id": 2
     },
     {
-      "id": 3,
-      "name": "Johnny"
+      "name": "Chauncey",
+      "status": "Part Time",
+      "id": 3
     }
   ],
   "animals": [
     {
       "id": 1,
-      "name": "Kingsley"
+      "name": "Kinggy",
+      "breed": "bus",
+      "employeeId": 2
     },
     {
       "id": 2,
-      "name": "Riley"
+      "name": "Vindaloo ",
+      "breed": "Taj buffet",
+      "employeeId": 3
     },
     {
-      "id": 3,
-      "name": "Mabel"
+      "name": "Slurpie ",
+      "breed": "Cow",
+      "employeeId": 3,
+      "id": 3
     }
   ],
   "locations": [
     {
-      "id": 1,
-      "name": "Nashville North",
-      "address": "500 Circle Way"
+      "name": "Nash South ",
+      "locationAddress": "my house",
+      "employeeId": 1,
+      "id": 1
     },
     {
-      "id": 2,
-      "name": "Nashville South",
-      "address": "22 Sick Animal Place"
+      "name": "Karls Garage Kennel",
+      "locationAddress": "Karl's Garage",
+      "employeeId": 1,
+      "id": 2
+    },
+    {
+      "name": "shorzies",
+      "locationAddress": "",
+      "employeeId": 1,
+      "id": 3
     }
   ],
   "owners": [
@@ -49,11 +66,6 @@
       "id": 2,
       "name": "Tom Brady",
       "phoneNumber": "203-641-1246"
-    },
-    {
-      "id": 3,
-      "name": "Valadmir",
-      "phoneNumber": "654-524-5935"
     }
   ]
 }

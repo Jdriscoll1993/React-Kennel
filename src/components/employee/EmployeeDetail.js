@@ -1,5 +1,6 @@
 import React, { Component } from "react"
-
+import "./Employee.css"
+// import dog from "./DogIcon.svg"
 
 export default class Employee extends Component {
 
