@@ -18,10 +18,10 @@ class LocationItem extends Component {
   render() {
     return (
       <article className = "location-item">
-          <h3>{this.props.location.name}</h3>
-          <h5>{this.props.location.address}</h5>
+          <h4>{this.props.location.name}</h4>
+          <h6>{this.props.location.locationAddress}</h6>
           <button onClick={this.handleClick} disabled={ this.state.saveDisabled }>Delete</button>
-          <Link to={`/locations/${this.props.location.id}`}>Details</Link>
+          <Link className="deets" to={`/locations/${this.props.location.id}`}>Details</Link>
           <hr/>
       </article>
     )

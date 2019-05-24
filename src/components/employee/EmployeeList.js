@@ -1,12 +1,22 @@
 import React, { Component } from 'react'
 import EmployeeItem from "./EmployeeItem"
-export default class EmployeeList extends Component {
+import { withRouter } from 'react-router';
+class EmployeeList extends Component {
 
     render() {
         return (
             <div className ="employee-div">
+                <h2>Employees</h2>
+                <div className="employeeButton">
+                    <button type="button"
+                            className="btn btn-success"
+                            onClick={() => {
+                                this.props.history.push("/employees/new")}
+                            }>
+                        Add New Employee
+                    </button>
+                </div>                
                 <section className="employees">
-                <h2>All Employees</h2>
                 <hr/>
                 {
                     this.props.employees.map((item)=>{
@@ -19,3 +29,5 @@ export default class EmployeeList extends Component {
          )
     }
 }
+
+export default withRouter(EmployeeList)

@@ -1,12 +1,13 @@
 import React, { Component } from "react";
-import "./Animal.css";
+import { withRouter } from 'react-router'
+// import "./Employee.css";
 
-class AnimalForm extends Component {
+class EmployeeForm extends Component {
   // Set initial state
   state = {
-    animalName: "",
-    breed: "",
-    employeeId: ""
+    employeeName: "",
+    // status: "",
+    animalId: ""
   };
 
   // Update state whenever an input field is edited
@@ -20,20 +21,19 @@ class AnimalForm extends Component {
         Local method for validation, creating animal object, and
         invoking the function reference passed from parent component
      */
-  constructNewAnimal = evt => {
-    if (this.state.employee === "") {
-      window.alert("Please select a caretaker");
+  constructNewEmployee = evt => {
+    if (this.state.animal === "") {
+      window.alert("Please select an animal");
     } else {
-      const animal = {
-        name: this.state.animalName,
-        breed: this.state.breed,
+      const employee = {
+        name: this.state.employeeName,
+        // status: this.state.status,
         // Make sure the employeeId is saved to the database as a number since it is a foreign key.
-        employeeId: parseInt(this.state.employeeId)
       };
 
       // Create the animal and redirect user to animal list
-      this.props.addAnimal(animal)
-        .then(() => this.props.history.push("/animals"));
+      this.props.addEmployee(employee)
+        .then(() => this.props.history.push("/employees"));
     }
   };
 
@@ -41,50 +41,50 @@ class AnimalForm extends Component {
       console.log("what are props", this.props)
     return (
       <React.Fragment>
-        <form className="animalForm">
+        <form className="employeeForm">
           <div className="form-group">
-            <label htmlFor="animalName">Animal name</label>
+            <label htmlFor="employeeName">Employee name</label>
             <input
               type="text"
               required
               className="form-control"
               onChange={this.handleFieldChange}
-              id="animalName"
-              placeholder="Animal name"
+              id="employeeName"
+              placeholder="Employee name"
             />
           </div>
           <div className="form-group">
-            <label htmlFor="breed">Breed</label>
+            <label htmlFor="status">Employment Status</label>
             <input
               type="text"
               required
               className="form-control"
               onChange={this.handleFieldChange}
-              id="breed"
-              placeholder="Breed"
+              id="status"
+              placeholder="Employment Status"
             />
           </div>
           <div className="form-group">
-            <label htmlFor="employee">Assign to caretaker</label>
+            <label htmlFor="animal">Assign to animal</label>
             <select
               defaultValue=""
-              name="employee"
-              id="employeeId"
+              name="animal"
+              id="animalId"
               onChange={this.handleFieldChange}
             >
-              <option value="">Select an employee</option>
-              {this.props.employees.map(e => (
+              <option value="">Select an animal</option>
+              {this.props.animals.map(e => (
                 <option key={e.id} id={e.id} value={e.id}>
                   {e.name}
                 </option>
               ))}
             </select>
           </div>
-          <button type="button" onClick={this.constructNewAnimal} className="btn btn-primary">Submit</button>
+          <button type="button" onClick={this.constructNewEmployee} className="btn btn-primary">Submit</button>
         </form>
       </React.Fragment>
     );
   }
 }
 
-export default AnimalForm
+export default withRouter(EmployeeForm)
