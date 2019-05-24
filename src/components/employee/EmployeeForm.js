@@ -23,7 +23,7 @@ class EmployeeForm extends Component {
      */
   constructNewEmployee = evt => {
     if (this.state.animal === "") {
-      window.alert("Please select an animal");
+      window.alert("Please select an employee");
     } else {
       const employee = {
         name: this.state.employeeName,

@@ -19,21 +19,9 @@
   "animals": [
     {
       "id": 1,
-      "name": "Kinggy",
-      "breed": "bus",
-      "employeeId": 2
-    },
-    {
-      "id": 2,
-      "name": "Vindaloo ",
-      "breed": "Taj buffet",
+      "name": "Ting",
+      "breed": "dog",
       "employeeId": 3
-    },
-    {
-      "name": "Slurpie ",
-      "breed": "Cow",
-      "employeeId": 3,
-      "id": 3
     }
   ],
   "locations": [
@@ -48,12 +36,6 @@
       "locationAddress": "Karl's Garage",
       "employeeId": 1,
       "id": 2
-    },
-    {
-      "name": "shorzies",
-      "locationAddress": "",
-      "employeeId": 1,
-      "id": 3
     }
   ],
   "owners": [

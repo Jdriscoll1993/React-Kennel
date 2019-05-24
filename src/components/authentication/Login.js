@@ -30,8 +30,8 @@ export default class Login extends Component {
             JSON.stringify({
                 email: this.state.email,
                 password: this.state.password
-            })
-        )
+            }))
+            this.props.history.push("/employees")
     }
 
     render() {

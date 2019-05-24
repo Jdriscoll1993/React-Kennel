@@ -1,12 +1,10 @@
 import React, { Component } from "react"
-import AnimalManager from "../../modules/AnimalManager"
-import "./Animal.css";
-export default class AnimalEditForm extends Component {
+import EmployeesManager from "../../modules/EmployeesManager"
+export default class EmployeeEditForm extends Component {
     // Set initial state
     state = {
-      animalName: "",
-      breed: "",
-      employeeId: ""
+      employeeName: "",
+      animalId: ""
     }
 
 
@@ -16,52 +14,51 @@ export default class AnimalEditForm extends Component {
         this.setState(stateToChange)
     }
 
-    updateExistingAnimal = evt => {
+    updateExistingEmployee = evt => {
       evt.preventDefault()
 
-      if (this.state.employee === "") {
-        window.alert("Please select a caretaker");
+      if (this.state.animal === "") {
+        window.alert("Please select an animal");
       } else {
-        const editedAnimal = {
-          id: this.props.match.params.animalId,
-          name: this.state.animalName,
-          breed: this.state.breed,
-          employeeId: parseInt(this.state.employeeId)
+        const editedEmployee = {
+          id: this.props.match.params.employeeId,
+          name: this.state.employeeName,
+          animalId: parseInt(this.state.animalId)
         };
 
-    this.props.updateAnimal(editedAnimal) 
+    this.props.updateEmployee(editedEmployee)
+    .then(() => this.props.history.push("/employees")) 
     }
   }
 
     componentDidMount() {
-      AnimalManager.get(this.props.match.params.animalId)
-      .then(animal => {
+        EmployeesManager.get(this.props.match.params.employeeId)
+        .then(employee => {
         this.setState({
-          animalName: animal.name,
-          breed: animal.breed,
-          employeeId: animal.employeeId
+          employeeName: employee.name,
+          animalId: employee.animalId
         });
       });
     }
 
 
     render() {
-        console.log("animal edit form")
+        console.log("employee edit form")
       return (
         <React.Fragment>
-          <form className="animalForm">
+          <form className="employeeForm">
             <div className="form-group">
-              <label htmlFor="animalName">Animal name</label>
+              <label htmlFor="employeeName">Employee name</label>
               <input
                 type="text"
                 required
                 className="form-control"
                 onChange={this.handleFieldChange}
-                id="animalName"
-                value = {this.state.animalName}
+                id="employeeName"
+                value = {this.state.employeeName}
               />
             </div>
-            <div className="form-group">
+            {/* <div className="form-group">
               <label htmlFor="breed">Breed</label>
               <input
                 type="text"
@@ -71,17 +68,17 @@ export default class AnimalEditForm extends Component {
                 id="breed"
                 value = {this.state.breed}
               />
-            </div>
+            </div> */}
             <div className="form-group">
-              <label htmlFor="employee">Assign to caretaker</label>
+              <label htmlFor="animal">Assign to animal</label>
               <select
-                name="employee"
-                id="employeeId"
+                name="animal"
+                id="animalId"
                 onChange={this.handleFieldChange}
-                value = {this.state.employeeId}
+                value = {this.state.animalId}
               >
-                <option value="">Select an employee</option>
-                {this.props.employees.map(e => (
+                <option value="">Select an animal</option>
+                {this.props.animals.map(e => (
                   <option key={e.id} id={e.id} value={e.id}>
                     {e.name}
                   </option>
@@ -90,7 +87,7 @@ export default class AnimalEditForm extends Component {
             </div>
             <button
               type="submit"
-              onClick={this.updateExistingAnimal}
+              onClick={this.updateExistingEmployee}
               className="btn btn-primary"
             >
               Submit

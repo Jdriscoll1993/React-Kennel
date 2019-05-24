@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {Link} from "react-router-dom"
+import shelter from "./shelter.svg"
 class LocationItem extends Component {
 
   state = {
@@ -18,6 +19,7 @@ class LocationItem extends Component {
   render() {
     return (
       <article className = "location-item">
+          <img src={ shelter } className="shelter" alt="dog"/>
           <h4>{this.props.location.name}</h4>
           <h6>{this.props.location.locationAddress}</h6>
           <button onClick={this.handleClick} disabled={ this.state.saveDisabled }>Delete</button>

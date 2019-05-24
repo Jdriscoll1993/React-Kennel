@@ -10,6 +10,7 @@ import LocationList from './location/LocationList'
 import LocationManager from "../modules/LocationManager"
 import LocationDetail from "./location/LocationDetail"
 import LocationForm from "./location/LocationForm"
+import EmployeeEditForm from "./employee/EmployeeEditForm"
 import EmployeeList from './employee/EmployeeList'
 import EmployeeForm from "./employee/EmployeeForm"
 import EmployeesManager from "../modules/EmployeesManager"
@@ -61,20 +62,6 @@ class ApplicationViews extends Component {
             })
         });
 };
-// employee
-    deleteEmployee = (id) => {
-        const newState = {};
-        EmployeesManager.deleteEmployee(id)
-        .then(EmployeesManager.getAll)
-        .then(employees => {
-            console.log("employees", employees);
-            newState.employees = employees
-            })
-            .then (() => {
-                this.props.history.push("/employees")
-                this.setState(newState)
-            })
-    }
 // location
     deleteLocation = (id) => {
         const newState = {};
@@ -98,6 +85,19 @@ class ApplicationViews extends Component {
             })
     );
 //employee
+    deleteEmployee = (id) => {
+        const newState = {};
+        EmployeesManager.deleteEmployee(id)
+        .then(EmployeesManager.getAll)
+        .then(employees => {
+            console.log("employees", employees);
+            newState.employees = employees
+            })
+            .then (() => {
+                this.props.history.push("/employees")
+                this.setState(newState)
+            })
+    }
     addEmployee = employee =>
         EmployeesManager.postEmployee(employee)
         .then(() => EmployeesManager.getAll())
@@ -106,6 +106,16 @@ class ApplicationViews extends Component {
                 employees: employees
             })
     );
+    updateEmployee = (editedEmployeeObject) => {
+        return EmployeesManager.put(editedEmployeeObject)
+        .then(() => EmployeesManager.getAll())
+        .then(employees => {
+            this.props.history.push("/employees")
+            this.setState({
+                employees: employees
+            })
+        });
+};
 //owner
     deleteOwner = (id) => {
         const newState = {};
@@ -226,6 +236,9 @@ class ApplicationViews extends Component {
                                 addEmployee={this.addEmployee}
                                 animals={this.state.animals} />
                 }} />               
+                 <Route path="/employees/:employeeId(\d+)/edit" render={props => {
+                    return <EmployeeEditForm {...props} updateEmployee={this.updateEmployee}/>
+                }} />             
             {/* //owner */}                
                 <Route exact path="/owners" render={(props) => {
                     return <OwnerList owners={this.state.owners}
